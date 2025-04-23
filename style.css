@@ -11,8 +11,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh; /* Alterado para min-height para evitar corte */
+  overflow: auto; /* Alterado para permitir rolagem se necessário */
 }
 
 .container {
@@ -22,43 +22,83 @@ body {
   padding: 40px;
   text-align: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  max-width: 400px;
+  max-width: 650px;
   width: 90%;
   position: relative;
-  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza conteúdo verticalmente dentro do container */
+  align-items: center; /* Centraliza conteúdo horizontalmente dentro do container */
+  min-height: 300px; /* Altura mínima em vez de fixa */
 }
 
 h1 {
   font-size: 28px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
 }
 
-.sub {
+.inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: nowrap; /* Evita quebra de linha por padrão */
+}
+
+.inputs label {
   font-size: 16px;
-  margin-bottom: 25px;
-  color: #fff9;
+  color: #fff;
+  font-weight: 500;
+  line-height: 40px; /* Alinha verticalmente com inputs */
+  white-space: nowrap; /* Impede quebra de texto */
+}
+
+.inputs input {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  width: 120px; /* Aumentado para melhor usabilidade */
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9); /* Fundo claro para contraste */
+  color: #333;
+  transition: box-shadow 0.3s ease;
+}
+
+.inputs input:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 64, 129, 0.7); /* Efeito de foco temático */
 }
 
 button {
   background-color: #ff4081;
-  color: white;
+  color: #fff;
   border: none;
-  padding: 15px 25px;
+  padding: 15px 30px;
   font-size: 18px;
   border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background-color: #e91e63;
+  transform: translateY(-2px); /* Efeito de elevação */
+}
+
+button:active {
+  transform: translateY(0); /* Volta ao clicar */
 }
 
 #result {
-  margin-top: 30px;
+  margin-top: 24px;
   font-size: 2.5rem;
   font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
 }
 
@@ -68,7 +108,7 @@ button:hover {
 
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.5); color: #4caf50; }
+  50% { transform: scale(1.5); color: #ffeb3b; } /* Amarelo vibrante no pulso */
   100% { transform: scale(1); }
 }
 
@@ -79,4 +119,43 @@ button:hover {
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 1; /* Garante que o confete fique atrás */
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .container {
+    padding: 24px;
+    min-height: 250px;
+    width: 95%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .inputs {
+    flex-direction: column; /* Empilha inputs em telas menores */
+    gap: 8px;
+  }
+
+  .inputs label {
+    line-height: 1.5; /* Ajusta alinhamento */
+    font-size: 14px;
+  }
+
+  .inputs input {
+    width: 100%; /* Ocupa toda a largura */
+    max-width: 200px; /* Limita largura máxima */
+    font-size: 14px;
+  }
+
+  button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  #result {
+    font-size: 2rem;
+  }
 }
