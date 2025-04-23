@@ -97,7 +97,7 @@ drawButton.addEventListener('click', () => {
 
   drawButton.disabled = true;
   let counter = 0;
-  const duration = 1000;
+  const duration = 5000;
   const intervalTime = 70;
   const totalSteps = duration / intervalTime;
 
